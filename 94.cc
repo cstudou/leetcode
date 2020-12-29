@@ -15,27 +15,18 @@ public:
         vector<int> vec;
         if(root == NULL)    return vec;
         stack<TreeNode*> st;
-        st.push(root);
-        while(root->left)    
+        while(root || !st.empty())
         {
-            st.push(root->left);
-            root = root->left;
-        }
-        while(!st.empty())
-        {
-            auto cur = st.top();         
-            vec.push_back(cur->val);
-            st.pop();
-            //if(cur->right)
-            auto p = cur->right;
-            while(p)
+            while(root)
             {
-                st.push(p); p=p->left;
+                st.push(root);
+                root=root->left;
+                
             }
-           
-
-            
-           
+            root = st.top();
+            st.pop();
+            vec.push_back(root->val);
+            root=root->right;   
         }
         return vec;
     }
